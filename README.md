@@ -21,6 +21,11 @@
   - [配置App.vue和index.html](#配置appvue和indexhtml)
     - [App.vue](#appvue)
     - [index.html](#indexhtml)
+  - [配置loader](#配置loader)
+    - [补全依赖](#补全依赖)
+    - [.babelrc](#babelrc)
+    - [webpack.config.js](#webpackconfigjs)
+- [拓展](#拓展) 
 - [特别鸣谢](#特别鸣谢)
 
 ## 前言
@@ -268,6 +273,66 @@
         <script src='dist/build.js'></script>
     </body >
 
+[top](#)
+
+### 配置loader
+
+#### 补全依赖
+>和vue1的环境搭建类似，在配置loader之前我们需要安装各种各样的包依赖。确保以下的包已经安装完成，以实现基础功能。
+
+    npm install babel-core --save-dev
+    npm install babel-loader --save-dev
+    npm install babel-preset-es2015 --save-dev
+    npm install vue-hot-reload-api --save-dev
+    npm install vue-style-loader --save-dev
+    npm install vue-template-compiler --save-dev
+    npm install css-loader --save-dev
+
+[top](#)
+
+#### .babelrc
+>由于我们需要识别es6，在vue2中不能像vue1那么配置config。因此，我们需要一个.babelrc文件进行配置。
+
+    {
+        "presets": ["es2015"],
+        "comments": false
+    }
+
+[top](#)
+
+#### webpack.config.js
+    var path = require('path')
+    module.exports = {
+        entry: './src/main.js',
+        output: {
+            path: path.resolve(__dirname, './dist'),//js，css，以及页面文件存放位置
+            publicPath: '/dist/',//静态文件所处文件夹
+            filename: 'build.js'//通过build来统筹
+        },
+        module: {
+            loaders: [
+                {
+                    test: /\.vue$/,
+                    loader: 'vue-loader'
+                },
+                {
+                    test: /\.css$/,   //加载外部css
+                    loader: 'vue-style!css'
+                },
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loader: 'babel-loader'
+                }
+            ]
+        }
+    }
+> __注意__ :在webpack2中规定了，loader的配置必须将loader的名字补全
+
+>经过以上步骤我们就可以顺利的运行`npm run dev`来预览基本的效果了
+
+[top](#)
+## 拓展
 [top](#)
 
 ## 特别鸣谢
