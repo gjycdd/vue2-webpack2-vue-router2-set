@@ -19,6 +19,9 @@
   - [配置路由](#配置路由)
   - [配置入口文件](#配置入口文件)
   - [配置App.vue和index.html](#配置appvue和indexhtml)
+    - [App.vue](#appvue)
+    - [index.html](#indexhtml)
+- [特别鸣谢](#特别鸣谢)
 
 ## 前言
 >上一部分简单介绍了下基于vue1+webpack1+vue-router1的环境搭建，但是还有很多不足，但是New is always the best ，所以我决定
@@ -27,8 +30,6 @@
 >github传送门 (https://github.com/gjycdd/vue1-webpack1-set)
 
 >码云    传送门 (https://git.oschina.net/gjycdd/vue1-webpack1-set)
-
->特别鸣谢 (http://www.qinshenxue.com/article/20161106163608.html)
 
 >在之前的教程中我们可以看到要搭建一个环境真的很不容易，对熟练工来说可能事几分钟的事情，大部分时间还是花在安装依赖的过程中，
 但是，对我们新手来说，这个时间就成倍增长，也许短的几个小时也就完成了，长的可能踩坑要踩好几天都不出不来，尤其是面对版本更新时
@@ -235,5 +236,41 @@
 [top](#)
 
 ### 配置App.vue和index.html
+>我们写了页面，配了路由那我们当然需要去展示我们的页面，那么该怎么展示呢
+
+#### App.vue
+    <template>
+         <div>
+    <!-- 请注意，vue2中使用router-link的标签来代替 v-link属性 -->
+              <router-link to='/home'>Home</router-link>
+              <router-link to='/test'>Home</router-link>
+    <!-- 视图加载的挂载点 -->
+              <router-view></router-view>
+         </div>
+    </template>
+    <script></script>
+    <style></style>
+>对上面的代码来说<router-link></router-link>的路径是可定制的可以传递你想要的参数
+
+    <router-link :to="{ path: '/home/'+pageId }"></router-link>
+>那么只要在router.js中对路由进行如下配置
+
+    { path: '/home/:id', components: Index }
+>就能够使得 ‘/home’后任意的路径都能访问到 home页面
+
+>具体的可以参考(http://router.vuejs.org/zh-cn/)
+
+[top](#)
+
+#### index.html
+    <body>
+        <div id='app'></div>
+        <script src='dist/build.js'></script>
+    </body >
+
+[top](#)
+
+## 特别鸣谢
+>特别鸣谢 (http://www.qinshenxue.com/article/20161106163608.html)
 
 [top](#)
