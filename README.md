@@ -5,6 +5,12 @@
   - [安装node](#安装node)
 - 正式开始
   - [初始化](#初始化)
+  - [安装基础包](#安装基础包)
+    - [安装vue2](#安装vue2)
+    - [安装vue-loader](#安装vue-loader)
+    - [安装vue-router](#安装vue-router)
+    - [安装webpack2](#安装webpack2)
+    - [安装热加载模块](#安装热加载模块)
 
 ## 前言
 >上一部分简单介绍了下基于vue1+webpack1+vue-router1的环境搭建，但是还有很多不足，但是New is always the best ，所以我决定
@@ -40,8 +46,44 @@
 
 [top](#目录)
 
-##正式开始
+## 正式开始
 ### 初始化
 > 利用npm自动生成package.json，来管理安装的包
 
 `npm init`
+
+[top](#目录)
+
+### 安装基础包
+
+#### 安装vue2
+`npm install vue --save-dev`
+>直接 __install vue__ 会自动安装 __最新版本__ 的 __vue2__ ，但是由于还是测试版所以存在各种未知bug，希望运用在 __生产环境__ 的的小伙伴自行安装vue2的 __稳定版本__ ，__这里__ 我就偷懒使用vue2的 __测试版本做简介了__ 。
+
+[top](#目录)
+
+#### 安装vue-loader
+`npm install vue-loader --save-dev`
+>安装最新的vue-loader,这篇教程我想说的是——All is new!!
+
+>__安装结束后可能会提示缺少某些包，没关系，按照提示全部安装一遍或者暂时忽略稍后安装也是可行的__
+
+[top](#目录)
+
+#### 安装vue-router
+`npm install vue-router --save-dev `
+>安装vue-router用以配置路由，vue-router2与1有着极大的差别，请各位注意
+
+[top](#目录)
+
+#### 安装webpack2
+`npm install webpack --save-dev`
+> 默认安装最新版本
+
+[top](#目录)
+
+#### 安装热加载模块
+`npm install webpack-dev-server --save-dev`
+>安装webpack热加载模块，修改文件实时刷新网页，免除修改一次代码就要重新打包刷新网页的麻烦。
+
+[top](#目录)
