@@ -11,6 +11,10 @@
     - [安装vue-router](#安装vue-router)
     - [安装webpack2](#安装webpack2)
     - [安装热加载模块](#安装热加载模块)
+  - [构建目录结构](#构建目录结构)
+  - [初步配置webpack](#初步配置webpack)
+    - [配置出入口](#配置出入口)
+    - [配置热加载](#配置热加载)
 
 ## 前言
 >上一部分简单介绍了下基于vue1+webpack1+vue-router1的环境搭建，但是还有很多不足，但是New is always the best ，所以我决定
@@ -85,5 +89,51 @@
 #### 安装热加载模块
 `npm install webpack-dev-server --save-dev`
 >安装webpack热加载模块，修改文件实时刷新网页，免除修改一次代码就要重新打包刷新网页的麻烦。
+
+[top](#)
+
+### 构建目录结构
+>| -- package.json&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//包管理文件 <br />
+| -- index.html          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 启动页<br />
+| -- .babelrc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 配置es6 - > es5<br />
+| -- webpack.config.js&nbsp;&nbsp;&nbsp;&nbsp;// webpack配置文件<br />
+| -- src<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | -- App.vue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//项目的入口页面<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | -- main.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//项目的入口js<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | -- router.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//项目的router配置文件<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | -- components&nbsp;&nbsp;&nbsp;&nbsp;//各个组件文件夹<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | -- views&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//各个vue存放的文件夹<br />
+
+[top](#)
+
+### 初步配置webpack
+#### 配置出入口
+    var path = require('path')
+    module.exports = {
+      entry: './src/main.js',
+      output: {
+          path: path.resolve(__dirname, './dist'),
+          publicPath: '/dist/',
+          filename: 'build.js'
+      }
+    }
+>其中output的各配置项作用如下：
+
+>- __path: './dist'__ 打包后js、css、image等存放的目录；
+
+>- __publicPath: '/dist/'__ 可以不配置，如果不配置则取默认 __publicPath: '/'__ ，在实际项目中，静态资源一般集中放在一个文件夹下，比如static目录，那么这里就应该改成 __publicPath: '/static/'__ ，相应的index.html中引用的 JS 也要改成 __src="/static/build.js"__ ，publicPath 可以解释为最终发布的服务器上 build.js 所在的目录，其他静态资源也应当在这个目录下。
+
+>- __filename: 'build.js'__ 打包的js文件名，index.html 引用的 JS 要和这里保持一致。
+
+[top](#)
+
+#### 配置热加载
+>在package.json中进行配置
+
+>新版本可能会提示你缺少 __vue-template-compiler__ 包依赖，那么只要安装就好了。
+
+    "scripts": {
+        "dev": "webpack-dev-server --inline --hot --open"
+    }
 
 [top](#)
