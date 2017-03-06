@@ -25,7 +25,11 @@
     - [补全依赖](#补全依赖)
     - [.babelrc](#babelrc)
     - [webpack.config.js](#webpackconfigjs)
-- [拓展](#拓展) 
+- [拓展](#拓展)
+  - [加载静态资源](#加载静态资源)
+  - [预编译css](#预编译css)
+  - [提取图片](#提取图片)
+- [后记](#后记)
 - [特别鸣谢](#特别鸣谢)
 
 ## 前言
@@ -332,7 +336,56 @@
 >经过以上步骤我们就可以顺利的运行`npm run dev`来预览基本的效果了
 
 [top](#)
+
 ## 拓展
+
+### 加载静态资源
+>vue模板以及CSS中免不了使用图片，现在如果直接加，又会报找不到模块的错误，静态资源（图片、图标字体、音频、视频、svg文件等）对应的loader为url-loader
+
+>因此首先我们需要安装包依赖:
+
+    npm install url-loader --save-dev
+    npm install file-loader --save-dev //url依赖file
+>安装好依赖，那么就需要在webpack.config.js中配置:
+
+    {
+        test: /\.(jpe?g|png|gif|svg|mp3)$/,
+        loader: "url-loader"
+    }
+> 配置好以上我们就可以在项目中加载我们需要的静态资源了。
+
+[top](#)
+
+### 预编译css
+>同样的我们需要先安装一些包依赖
+
+    {
+      "less": "^2.3.1", // less-loader依赖less
+      "less-loader": "^2.2.3",
+      "node-sass": "^3.4.2", // sass-loader依赖node-sass
+      "sass-loader": "^4.0.2",
+      "stylus": "^0.54.5", // stylus-loader依赖stylus
+      "stylus-loader": "^2.4.0"
+    }
+>在这里就和css一样了，如果我们不需要引入外部文件，只要在vue文件内部使用，那么不需要配置loader，但是考虑到项目的可拓展性，我们最好还是配置一下loader，引入的方式同css，只需要`require(指定目录/xxx.scss)`即可。
+
+[top](#)
+
+### 提取图片
+>对于图片来说我们有时候也许会有许多的小图片，但是我们又不想反复的去加载这些图片该怎么办？
+
+>提取图片就在在url-loader的配置中添加
+
+    query:{
+      name:'images/[name].[ext]',
+      limit:10000// 单位：字节 <10kb的图片会被转换为DataUrl存储起来
+    }
+
+[top](#)
+
+## 后记
+>由于本人也是新手，所以配置的时候也多有缺漏还需要继续学习，希望新手们同胞们能通过我这些浅薄的方法有所收获。同时也希望能指出我错误或者不足的地方，让我能够及时修改和学习，谢谢~~~
+
 [top](#)
 
 ## 特别鸣谢
