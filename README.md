@@ -16,6 +16,7 @@
     - [配置出入口](#配置出入口)
     - [配置热加载](#配置热加载)
   - [搭建vue页面](#搭建vue页面)
+  - [配置路由](#配置路由)
 
 ## 前言
 >上一部分简单介绍了下基于vue1+webpack1+vue-router1的环境搭建，但是还有很多不足，但是New is always the best ，所以我决定
@@ -179,5 +180,31 @@
     </script>
     <style></style>
 >相似的我们再创建一个test.vue页面
+
+[top](#)
+
+### 配置路由
+>就如同vue1要使用vue-router1一般，vue2同样需要和vue-router2配套使用，值得一提的是在2.0版本中router的配置变得更加简洁可定制，舍弃了原本router.map的方法，转而使用更简单的方式。
+
+>在router.js中我们通过import(ES6语法，使用require也可)引入我们需要的模块，并且配置router。
+
+    import Vue from 'vue';
+    import VueRouter from 'vue-router';
+    import Index from './views/index.vue'; //将页面引入
+    import Test from './views/test.vue'; //将页面引入
+    Vue.use(VueRouter);
+
+    let router = new VueRouter({
+        routes: [
+            {path:'/home', component: Index},
+            {path:'/test', component: Test}
+        ]
+    })
+
+    export default router
+>上面的代码有几点需要注意：
+> - `new VueRouter()`中必须传递一个`对象`
+> - 请不要想当当然的写成routers: []，一定一定是`routes: []`
+> - 一个页面中可以有许多个export将需要的内容暴露给全局，但是`一定只有一个`export default
 
 [top](#)
