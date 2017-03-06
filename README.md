@@ -17,6 +17,8 @@
     - [配置热加载](#配置热加载)
   - [搭建vue页面](#搭建vue页面)
   - [配置路由](#配置路由)
+  - [配置入口文件](#配置入口文件)
+  - [配置App.vue和index.html](#配置appvue和indexhtml)
 
 ## 前言
 >上一部分简单介绍了下基于vue1+webpack1+vue-router1的环境搭建，但是还有很多不足，但是New is always the best ，所以我决定
@@ -206,5 +208,32 @@
 > - `new VueRouter()`中必须传递一个`对象`
 > - 请不要想当当然的写成routers: []，一定一定是`routes: []`
 > - 一个页面中可以有许多个export将需要的内容暴露给全局，但是`一定只有一个`export default
+
+[top](#)
+
+### 配置入口文件
+>由于router的版本和vue的版本影响，为main.js的配置也带来了很大的变化
+
+    import Vue from 'vue';
+    import router from './router';
+    import App from './App.vue';
+    new Vue({
+         router,
+         render: h => h(App)
+    }).$mount('#app')
+>上面对vue的初始化采用了手动挂载节点的方法，当然还有一种办法同样可以挂载节点。
+
+    import Vue from 'vue';
+    import router from './router';
+    import App from './App.vue';
+    new Vue({
+         el: '#app',
+         router,
+         render: h => h(App)
+    })
+
+[top](#)
+
+### 配置App.vue和index.html
 
 [top](#)
