@@ -135,5 +135,13 @@
     "scripts": {
         "dev": "webpack-dev-server --inline --hot --open"
     }
+>在以上配置保存后可以打开命令行（win+r）或者你的git工具到项目跟目录下运行`npm run dev`
+
+>访问`localhost:8080`（提前在index.html中写入内容确认是否成功）
+
+>各命令参数作用如下：
+- `--inline` 一共两种模式，默认为iframe模式，inline和iframe模式最明显的区别就是访问路径的不同，iframe模式的访问路径是 `http://localhost:8080/webpack-dev-server/` ，实际上iframe模式页面嵌入的iframe标签的地址还是 `http://localhost:8080/` ，那岂不是可以直接访问，不禁想问为啥不直接访问呢？因为无论是哪种模式，都是为了做到修改代码后能自动刷新，其中iframe模式是在修改代码后，重新加载iframe，而--inline是刷新浏览器，本质上都是重新全部加载一遍
+- `--hot` iframe不需要配置，配置了反而不能正常刷新了，所以只能配合--inline使用，作用是开启热替换，修改代码后，浏览器只会重新加载修改的组件代码，不会全部重新加载
+- `--open` 自动打开浏览器
 
 [top](#)
