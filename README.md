@@ -28,7 +28,7 @@
 
 >所以这又是一篇新手向的环境搭建教程，希望能给同样在挣扎的新手同胞们一些小小的帮助。
 
-[top](#目录)
+[top](#)
 
 ## 准备工作
 ### 安装node
@@ -44,7 +44,7 @@
 >npm安装包的使用方法
 `npm i/install 包名@版本号 --save-dev`
 
-[top](#目录)
+[top](#)
 
 ## 正式开始
 ### 初始化
@@ -52,7 +52,7 @@
 
 `npm init`
 
-[top](#目录)
+[top](#)
 
 ### 安装基础包
 
@@ -60,7 +60,7 @@
 `npm install vue --save-dev`
 >直接 __install vue__ 会自动安装 __最新版本__ 的 __vue2__ ，但是由于还是测试版所以存在各种未知bug，希望运用在 __生产环境__ 的的小伙伴自行安装vue2的 __稳定版本__ ，__这里__ 我就偷懒使用vue2的 __测试版本做简介了__ 。
 
-[top](#目录)
+[top](#)
 
 #### 安装vue-loader
 `npm install vue-loader --save-dev`
@@ -68,22 +68,22 @@
 
 >__安装结束后可能会提示缺少某些包，没关系，按照提示全部安装一遍或者暂时忽略稍后安装也是可行的__
 
-[top](#目录)
+[top](#)
 
 #### 安装vue-router
 `npm install vue-router --save-dev `
 >安装vue-router用以配置路由，vue-router2与1有着极大的差别，请各位注意
 
-[top](#目录)
+[top](#)
 
 #### 安装webpack2
 `npm install webpack --save-dev`
 > 默认安装最新版本
 
-[top](#目录)
+[top](#)
 
 #### 安装热加载模块
 `npm install webpack-dev-server --save-dev`
 >安装webpack热加载模块，修改文件实时刷新网页，免除修改一次代码就要重新打包刷新网页的麻烦。
 
-[top](#目录)
+[top](#)
