@@ -15,6 +15,7 @@
   - [初步配置webpack](#初步配置webpack)
     - [配置出入口](#配置出入口)
     - [配置热加载](#配置热加载)
+  - [搭建vue页面](#搭建vue页面)
 
 ## 前言
 >上一部分简单介绍了下基于vue1+webpack1+vue-router1的环境搭建，但是还有很多不足，但是New is always the best ，所以我决定
@@ -143,5 +144,40 @@
 - `--inline` 一共两种模式，默认为iframe模式，inline和iframe模式最明显的区别就是访问路径的不同，iframe模式的访问路径是 `http://localhost:8080/webpack-dev-server/` ，实际上iframe模式页面嵌入的iframe标签的地址还是 `http://localhost:8080/` ，那岂不是可以直接访问，不禁想问为啥不直接访问呢？因为无论是哪种模式，都是为了做到修改代码后能自动刷新，其中iframe模式是在修改代码后，重新加载iframe，而--inline是刷新浏览器，本质上都是重新全部加载一遍
 - `--hot` iframe不需要配置，配置了反而不能正常刷新了，所以只能配合--inline使用，作用是开启热替换，修改代码后，浏览器只会重新加载修改的组件代码，不会全部重新加载
 - `--open` 自动打开浏览器
+
+[top](#)
+
+### 搭建vue页面
+#### 在搭建vue页面之前我们来学习一下vue文件的结构(老司机请自动忽略)
+    <template></template> //请务必记住template内一般只允许存在一个节点
+    <script>
+     export default {
+          name: '',
+          data () {  //当存在data时，必须有return
+               return {}
+          }
+     }
+    </script>
+    <style>可以在这里写css,前提是已经安装css-loader</style>
+#### 我们需要在views下搭建两个vue页面，为接下来router的配置做准备
+>创建一个home.vue页面
+
+    <template>
+         <div>
+              <h1>This is {{pageName}} page</h1>
+        </div>
+    </template>
+    <script>
+         export default {
+              name: 'home',
+              data () {
+                   return {
+                        pageName: 'home'
+                   }
+              }
+         }
+    </script>
+    <style></style>
+>相似的我们再创建一个test.vue页面
 
 [top](#)
